@@ -35,15 +35,17 @@
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.TcBul = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.BtnTeslimEt = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.label3 = new System.Windows.Forms.Label();
             this.KitapID = new System.Windows.Forms.TextBox();
+            this.OgrenciTC = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.OgrenciAd = new System.Windows.Forms.Label();
-            this.OgrenciTc = new System.Windows.Forms.Label();
+            this.TC = new System.Windows.Forms.Label();
             this.OgrenciID = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
@@ -122,18 +124,21 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Öğrenci TC :";
             // 
-            // simpleButton1
+            // BtnTeslimEt
             // 
-            this.simpleButton1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
-            this.simpleButton1.Location = new System.Drawing.Point(76, 361);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(105, 36);
-            this.simpleButton1.TabIndex = 3;
-            this.simpleButton1.Text = "Teslim Et";
+            this.BtnTeslimEt.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("BtnTeslimEt.ImageOptions.SvgImage")));
+            this.BtnTeslimEt.Location = new System.Drawing.Point(76, 361);
+            this.BtnTeslimEt.Name = "BtnTeslimEt";
+            this.BtnTeslimEt.Size = new System.Drawing.Size(105, 36);
+            this.BtnTeslimEt.TabIndex = 3;
+            this.BtnTeslimEt.Text = "Teslim Et";
+            this.BtnTeslimEt.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // groupControl2
             // 
+            this.groupControl2.Controls.Add(this.label3);
             this.groupControl2.Controls.Add(this.KitapID);
+            this.groupControl2.Controls.Add(this.OgrenciTC);
             this.groupControl2.Controls.Add(this.label2);
             this.groupControl2.Location = new System.Drawing.Point(12, 191);
             this.groupControl2.Name = "groupControl2";
@@ -141,18 +146,33 @@
             this.groupControl2.TabIndex = 4;
             this.groupControl2.Text = "Teslim Edilecek Kitap";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(5, 55);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(67, 13);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Öğrenci TC :";
+            // 
             // KitapID
             // 
-            this.KitapID.Location = new System.Drawing.Point(73, 57);
+            this.KitapID.Location = new System.Drawing.Point(74, 80);
             this.KitapID.Name = "KitapID";
-            this.KitapID.Size = new System.Drawing.Size(157, 21);
-            this.KitapID.TabIndex = 1;
-            this.KitapID.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.KitapID.Size = new System.Drawing.Size(156, 21);
+            this.KitapID.TabIndex = 2;
+            // 
+            // OgrenciTC
+            // 
+            this.OgrenciTC.Location = new System.Drawing.Point(74, 53);
+            this.OgrenciTC.Name = "OgrenciTC";
+            this.OgrenciTC.Size = new System.Drawing.Size(156, 21);
+            this.OgrenciTC.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(5, 60);
+            this.label2.Location = new System.Drawing.Point(16, 83);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 13);
             this.label2.TabIndex = 0;
@@ -185,7 +205,7 @@
             // groupControl3
             // 
             this.groupControl3.Controls.Add(this.OgrenciAd);
-            this.groupControl3.Controls.Add(this.OgrenciTc);
+            this.groupControl3.Controls.Add(this.TC);
             this.groupControl3.Controls.Add(this.OgrenciID);
             this.groupControl3.Controls.Add(this.label5);
             this.groupControl3.Controls.Add(this.label23);
@@ -205,13 +225,13 @@
             this.OgrenciAd.Size = new System.Drawing.Size(0, 13);
             this.OgrenciAd.TabIndex = 8;
             // 
-            // OgrenciTc
+            // TC
             // 
-            this.OgrenciTc.AutoSize = true;
-            this.OgrenciTc.Location = new System.Drawing.Point(76, 99);
-            this.OgrenciTc.Name = "OgrenciTc";
-            this.OgrenciTc.Size = new System.Drawing.Size(0, 13);
-            this.OgrenciTc.TabIndex = 8;
+            this.TC.AutoSize = true;
+            this.TC.Location = new System.Drawing.Point(76, 99);
+            this.TC.Name = "TC";
+            this.TC.Size = new System.Drawing.Size(0, 13);
+            this.TC.TabIndex = 8;
             // 
             // OgrenciID
             // 
@@ -252,11 +272,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(934, 411);
             this.Controls.Add(this.groupControl3);
             this.Controls.Add(this.gridControl2);
             this.Controls.Add(this.groupControl2);
-            this.Controls.Add(this.simpleButton1);
+            this.Controls.Add(this.BtnTeslimEt);
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.gridControl1);
             this.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
@@ -290,11 +311,11 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraEditors.GroupControl groupControl1;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.SimpleButton BtnTeslimEt;
         private System.Windows.Forms.TextBox TcBul;
         private System.Windows.Forms.Label label1;
         private DevExpress.XtraEditors.GroupControl groupControl2;
-        private System.Windows.Forms.TextBox KitapID;
+        private System.Windows.Forms.TextBox OgrenciTC;
         private System.Windows.Forms.Label label2;
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
         private DevExpress.XtraGrid.GridControl gridControl2;
@@ -304,7 +325,9 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Label OgrenciAd;
-        private System.Windows.Forms.Label OgrenciTc;
+        private System.Windows.Forms.Label TC;
         private System.Windows.Forms.Label OgrenciID;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox KitapID;
     }
 }

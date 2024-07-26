@@ -34,6 +34,8 @@
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.MskTc = new System.Windows.Forms.MaskedTextBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.MskKaydet = new DevExpress.XtraEditors.SimpleButton();
             this.MskAdres = new System.Windows.Forms.RichTextBox();
             this.MskCinsiyet = new System.Windows.Forms.ComboBox();
@@ -51,8 +53,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.MskTcG = new System.Windows.Forms.MaskedTextBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.MskIDG = new System.Windows.Forms.MaskedTextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.MskGüncelle = new DevExpress.XtraEditors.SimpleButton();
             this.MskAdresG = new System.Windows.Forms.RichTextBox();
             this.MskCinsiyetG = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -74,11 +79,6 @@
             this.MskIDS = new System.Windows.Forms.MaskedTextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.MskSil = new DevExpress.XtraEditors.SimpleButton();
-            this.MskTc = new System.Windows.Forms.MaskedTextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.MskTcG = new System.Windows.Forms.MaskedTextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.MskGüncelle = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage1.SuspendLayout();
@@ -164,6 +164,23 @@
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "Öğrenci Bilgileri";
             this.groupControl1.Paint += new System.Windows.Forms.PaintEventHandler(this.groupControl1_Paint);
+            // 
+            // MskTc
+            // 
+            this.MskTc.Location = new System.Drawing.Point(106, 200);
+            this.MskTc.Name = "MskTc";
+            this.MskTc.Size = new System.Drawing.Size(203, 21);
+            this.MskTc.TabIndex = 18;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label16.Location = new System.Drawing.Point(7, 200);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(92, 20);
+            this.label16.TabIndex = 17;
+            this.label16.Text = "TC. Kimlik No :";
             // 
             // MskKaydet
             // 
@@ -341,6 +358,23 @@
             this.groupControl2.TabIndex = 3;
             this.groupControl2.Text = "Öğrenci Bilgileri";
             // 
+            // MskTcG
+            // 
+            this.MskTcG.Location = new System.Drawing.Point(106, 227);
+            this.MskTcG.Name = "MskTcG";
+            this.MskTcG.Size = new System.Drawing.Size(203, 21);
+            this.MskTcG.TabIndex = 20;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label17.Location = new System.Drawing.Point(7, 227);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(92, 20);
+            this.label17.TabIndex = 19;
+            this.label17.Text = "TC. Kimlik No :";
+            // 
             // MskIDG
             // 
             this.MskIDG.Location = new System.Drawing.Point(105, 38);
@@ -357,6 +391,16 @@
             this.label8.Size = new System.Drawing.Size(27, 20);
             this.label8.TabIndex = 17;
             this.label8.Text = "ID :";
+            // 
+            // MskGüncelle
+            // 
+            this.MskGüncelle.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("MskGüncelle.ImageOptions.SvgImage")));
+            this.MskGüncelle.Location = new System.Drawing.Point(104, 369);
+            this.MskGüncelle.Name = "MskGüncelle";
+            this.MskGüncelle.Size = new System.Drawing.Size(204, 54);
+            this.MskGüncelle.TabIndex = 16;
+            this.MskGüncelle.Text = "Güncelle";
+            this.MskGüncelle.Click += new System.EventHandler(this.MskKaydetG_Click);
             // 
             // MskAdresG
             // 
@@ -555,54 +599,11 @@
             this.MskSil.Text = "Sil";
             this.MskSil.Click += new System.EventHandler(this.MskSil_Click);
             // 
-            // MskTc
-            // 
-            this.MskTc.Location = new System.Drawing.Point(106, 200);
-            this.MskTc.Name = "MskTc";
-            this.MskTc.Size = new System.Drawing.Size(203, 21);
-            this.MskTc.TabIndex = 18;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label16.Location = new System.Drawing.Point(7, 200);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(92, 20);
-            this.label16.TabIndex = 17;
-            this.label16.Text = "TC. Kimlik No :";
-            // 
-            // MskTcG
-            // 
-            this.MskTcG.Location = new System.Drawing.Point(106, 227);
-            this.MskTcG.Name = "MskTcG";
-            this.MskTcG.Size = new System.Drawing.Size(203, 21);
-            this.MskTcG.TabIndex = 20;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label17.Location = new System.Drawing.Point(7, 227);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(92, 20);
-            this.label17.TabIndex = 19;
-            this.label17.Text = "TC. Kimlik No :";
-            // 
-            // MskGüncelle
-            // 
-            this.MskGüncelle.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("MskGüncelle.ImageOptions.SvgImage")));
-            this.MskGüncelle.Location = new System.Drawing.Point(104, 369);
-            this.MskGüncelle.Name = "MskGüncelle";
-            this.MskGüncelle.Size = new System.Drawing.Size(204, 54);
-            this.MskGüncelle.TabIndex = 16;
-            this.MskGüncelle.Text = "Güncelle";
-            this.MskGüncelle.Click += new System.EventHandler(this.MskKaydetG_Click);
-            // 
             // FrmOgrenciIslemleri
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(994, 526);
             this.Controls.Add(this.xtraTabControl1);
             this.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));

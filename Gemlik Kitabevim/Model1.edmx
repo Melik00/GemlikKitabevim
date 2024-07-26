@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DboGemlikKitabevimModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TBL_KAYITLAR">
+          <Key>
+            <PropertyRef Name="KAYITID" />
+          </Key>
+          <Property Name="KAYITID" Type="int" Nullable="false" />
+          <Property Name="KULLANICI" Type="int" />
+          <Property Name="KITAPID" Type="int" />
+          <Property Name="ALISTARIH" Type="datetime" />
+          <Property Name="SONTARIH" Type="datetime" />
+          <Property Name="DURUM" Type="bit" />
+        </EntityType>
+        <EntityType Name="TBL_KITAPLAR">
+          <Key>
+            <PropertyRef Name="KITAPID" />
+          </Key>
+          <Property Name="KITAPID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KITAPAD" Type="nvarchar" MaxLength="50" />
+          <Property Name="KONUSU" Type="nvarchar" MaxLength="50" />
+          <Property Name="YAZARI" Type="nvarchar" MaxLength="50" />
+          <Property Name="SAYFASI" Type="nvarchar" MaxLength="5" />
+          <Property Name="YAYINEVI" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TBL_OGRENCILER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ADSOYAD" Type="nvarchar" MaxLength="50" />
+          <Property Name="DOGUMTARIHI" Type="nvarchar" MaxLength="10" />
+          <Property Name="TELEFON" Type="nvarchar" MaxLength="15" />
+          <Property Name="MAIL" Type="nvarchar" MaxLength="50" />
+          <Property Name="UYELIKTARIHI" Type="nvarchar" MaxLength="10" />
+          <Property Name="CINSIYET" Type="nvarchar" MaxLength="5" />
+          <Property Name="TCNO" Type="nvarchar" MaxLength="11" />
+          <Property Name="ADRES" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <Association Name="FK_TBL_KAYITLAR_TBL_KITAPLAR">
+          <End Role="TBL_KITAPLAR" Type="Self.TBL_KITAPLAR" Multiplicity="0..1" />
+          <End Role="TBL_KAYITLAR" Type="Self.TBL_KAYITLAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_KITAPLAR">
+              <PropertyRef Name="KITAPID" />
+            </Principal>
+            <Dependent Role="TBL_KAYITLAR">
+              <PropertyRef Name="KITAPID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_KAYITLAR_TBL_OGRENCILER">
+          <End Role="TBL_OGRENCILER" Type="Self.TBL_OGRENCILER" Multiplicity="0..1" />
+          <End Role="TBL_KAYITLAR" Type="Self.TBL_KAYITLAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_OGRENCILER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TBL_KAYITLAR">
+              <PropertyRef Name="KULLANICI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DboGemlikKitabevimModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_KAYITLAR" EntityType="Self.TBL_KAYITLAR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_KITAPLAR" EntityType="Self.TBL_KITAPLAR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_OGRENCILER" EntityType="Self.TBL_OGRENCILER" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TBL_KAYITLAR_TBL_KITAPLAR" Association="Self.FK_TBL_KAYITLAR_TBL_KITAPLAR">
+            <End Role="TBL_KITAPLAR" EntitySet="TBL_KITAPLAR" />
+            <End Role="TBL_KAYITLAR" EntitySet="TBL_KAYITLAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_KAYITLAR_TBL_OGRENCILER" Association="Self.FK_TBL_KAYITLAR_TBL_OGRENCILER">
+            <End Role="TBL_OGRENCILER" EntitySet="TBL_OGRENCILER" />
+            <End Role="TBL_KAYITLAR" EntitySet="TBL_KAYITLAR" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DboGemlikKitabevimModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TBL_KAYITLAR">
+          <Key>
+            <PropertyRef Name="KAYITID" />
+          </Key>
+          <Property Name="KAYITID" Type="Int32" Nullable="false" />
+          <Property Name="KULLANICI" Type="Int32" />
+          <Property Name="KITAPID" Type="Int32" />
+          <Property Name="ALISTARIH" Type="DateTime" Precision="3" />
+          <Property Name="SONTARIH" Type="DateTime" Precision="3" />
+          <Property Name="DURUM" Type="Boolean" />
+          <NavigationProperty Name="TBL_KITAPLAR" Relationship="Self.FK_TBL_KAYITLAR_TBL_KITAPLAR" FromRole="TBL_KAYITLAR" ToRole="TBL_KITAPLAR" />
+          <NavigationProperty Name="TBL_OGRENCILER" Relationship="Self.FK_TBL_KAYITLAR_TBL_OGRENCILER" FromRole="TBL_KAYITLAR" ToRole="TBL_OGRENCILER" />
+        </EntityType>
+        <EntityType Name="TBL_KITAPLAR">
+          <Key>
+            <PropertyRef Name="KITAPID" />
+          </Key>
+          <Property Name="KITAPID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KITAPAD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KONUSU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="YAZARI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SAYFASI" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="YAYINEVI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TBL_KAYITLAR" Relationship="Self.FK_TBL_KAYITLAR_TBL_KITAPLAR" FromRole="TBL_KITAPLAR" ToRole="TBL_KAYITLAR" />
+        </EntityType>
+        <EntityType Name="TBL_OGRENCILER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ADSOYAD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOGUMTARIHI" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TELEFON" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="MAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UYELIKTARIHI" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CINSIYET" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="TCNO" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="ADRES" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TBL_KAYITLAR" Relationship="Self.FK_TBL_KAYITLAR_TBL_OGRENCILER" FromRole="TBL_OGRENCILER" ToRole="TBL_KAYITLAR" />
+        </EntityType>
+        <Association Name="FK_TBL_KAYITLAR_TBL_KITAPLAR">
+          <End Role="TBL_KITAPLAR" Type="Self.TBL_KITAPLAR" Multiplicity="0..1" />
+          <End Role="TBL_KAYITLAR" Type="Self.TBL_KAYITLAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_KITAPLAR">
+              <PropertyRef Name="KITAPID" />
+            </Principal>
+            <Dependent Role="TBL_KAYITLAR">
+              <PropertyRef Name="KITAPID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_KAYITLAR_TBL_OGRENCILER">
+          <End Role="TBL_OGRENCILER" Type="Self.TBL_OGRENCILER" Multiplicity="0..1" />
+          <End Role="TBL_KAYITLAR" Type="Self.TBL_KAYITLAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_OGRENCILER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TBL_KAYITLAR">
+              <PropertyRef Name="KULLANICI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DboGemlikKitabevimEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TBL_KAYITLAR" EntityType="Self.TBL_KAYITLAR" />
+          <EntitySet Name="TBL_KITAPLAR" EntityType="Self.TBL_KITAPLAR" />
+          <EntitySet Name="TBL_OGRENCILER" EntityType="Self.TBL_OGRENCILER" />
+          <AssociationSet Name="FK_TBL_KAYITLAR_TBL_KITAPLAR" Association="Self.FK_TBL_KAYITLAR_TBL_KITAPLAR">
+            <End Role="TBL_KITAPLAR" EntitySet="TBL_KITAPLAR" />
+            <End Role="TBL_KAYITLAR" EntitySet="TBL_KAYITLAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_KAYITLAR_TBL_OGRENCILER" Association="Self.FK_TBL_KAYITLAR_TBL_OGRENCILER">
+            <End Role="TBL_OGRENCILER" EntitySet="TBL_OGRENCILER" />
+            <End Role="TBL_KAYITLAR" EntitySet="TBL_KAYITLAR" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DboGemlikKitabevimModelStoreContainer" CdmEntityContainer="DboGemlikKitabevimEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DboGemlikKitabevimModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_KAYITLAR">
+            <EntityTypeMapping TypeName="DboGemlikKitabevimModel.TBL_KAYITLAR">
+              <MappingFragment StoreEntitySet="TBL_KAYITLAR">
+                <ScalarProperty Name="KAYITID" ColumnName="KAYITID" />
+                <ScalarProperty Name="KULLANICI" ColumnName="KULLANICI" />
+                <ScalarProperty Name="KITAPID" ColumnName="KITAPID" />
+                <ScalarProperty Name="ALISTARIH" ColumnName="ALISTARIH" />
+                <ScalarProperty Name="SONTARIH" ColumnName="SONTARIH" />
+                <ScalarProperty Name="DURUM" ColumnName="DURUM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_KITAPLAR">
+            <EntityTypeMapping TypeName="DboGemlikKitabevimModel.TBL_KITAPLAR">
+              <MappingFragment StoreEntitySet="TBL_KITAPLAR">
+                <ScalarProperty Name="KITAPID" ColumnName="KITAPID" />
+                <ScalarProperty Name="KITAPAD" ColumnName="KITAPAD" />
+                <ScalarProperty Name="KONUSU" ColumnName="KONUSU" />
+                <ScalarProperty Name="YAZARI" ColumnName="YAZARI" />
+                <ScalarProperty Name="SAYFASI" ColumnName="SAYFASI" />
+                <ScalarProperty Name="YAYINEVI" ColumnName="YAYINEVI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_OGRENCILER">
+            <EntityTypeMapping TypeName="DboGemlikKitabevimModel.TBL_OGRENCILER">
+              <MappingFragment StoreEntitySet="TBL_OGRENCILER">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ADSOYAD" ColumnName="ADSOYAD" />
+                <ScalarProperty Name="DOGUMTARIHI" ColumnName="DOGUMTARIHI" />
+                <ScalarProperty Name="TELEFON" ColumnName="TELEFON" />
+                <ScalarProperty Name="MAIL" ColumnName="MAIL" />
+                <ScalarProperty Name="UYELIKTARIHI" ColumnName="UYELIKTARIHI" />
+                <ScalarProperty Name="CINSIYET" ColumnName="CINSIYET" />
+                <ScalarProperty Name="TCNO" ColumnName="TCNO" />
+                <ScalarProperty Name="ADRES" ColumnName="ADRES" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

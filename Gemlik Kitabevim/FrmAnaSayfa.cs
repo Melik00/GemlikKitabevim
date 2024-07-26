@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace Gemlik_Kitabevim
 {
-    public partial class Form1 : Form
+    public partial class FrmAnaSayfa : Form
     {
-        public Form1()
+        public FrmAnaSayfa()
         {
             InitializeComponent();
         }
@@ -84,6 +84,18 @@ namespace Gemlik_Kitabevim
         {
             FrmKayitlar kayitlar = new FrmKayitlar();
             kayitlar.Show();
+        }
+
+        private void hakkımızdaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmHakkinda hakkinda = new FrmHakkinda();
+            hakkinda.Show();
+        }
+
+        private void iletişimToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmIletisim iletisim = new FrmIletisim();
+            iletisim.Show();
         }
     }
 }
