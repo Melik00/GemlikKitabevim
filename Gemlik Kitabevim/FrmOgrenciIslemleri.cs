@@ -48,6 +48,9 @@ namespace Gemlik_Kitabevim
             komut.ExecuteNonQuery();
             baglanti.Close();
             guncelle();
+
+            MessageBox.Show("Öğrenci başarıyla güncellendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
 
         private void FrmOgrenciIslemleri_Load(object sender, EventArgs e)
@@ -71,6 +74,9 @@ namespace Gemlik_Kitabevim
             komut.ExecuteNonQuery();
             baglanti.Close();
             guncelle();
+
+            MessageBox.Show("Öğrenci başarıyla kaydedildi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
 
         private void MskSil_Click(object sender, EventArgs e)
@@ -81,6 +87,9 @@ namespace Gemlik_Kitabevim
             komut.ExecuteNonQuery();
             baglanti.Close();
             guncelle();
+
+            MessageBox.Show("Öğrenci başarıyla silindi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
     }
 }

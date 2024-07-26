@@ -43,18 +43,34 @@ namespace Gemlik_Kitabevim
 
         private void BtnKaydet_Click(object sender, EventArgs e)
         {
-            baglanti.Open();
-            string sorgu_kaydet = "insert into TBL_KITAPLAR (KITAPAD, KONUSU, YAZARI, SAYFASI, YAYINEVI) values (@KITAPAD, @KONUSU, @YAZARI, @SAYFASI, @YAYINEVI)";
-            SqlCommand komut = new SqlCommand(sorgu_kaydet, baglanti);
-            komut.Parameters.AddWithValue("@KITAPAD", KitapAd.Text);
-            komut.Parameters.AddWithValue("@KONUSU", Konusu.Text);
-            komut.Parameters.AddWithValue("@YAZARI", Yazarı.Text);
-            komut.Parameters.AddWithValue("@SAYFASI", Sayfa.Text);
-            komut.Parameters.AddWithValue("@YAYINEVI", Yayınevi.Text);
-            komut.ExecuteNonQuery();
-            baglanti.Close();
-            guncelle();
+            using (var baglanti = new SqlConnection("Data Source=Melik-Laptop;Initial Catalog=DboGemlikKitabevim;Integrated Security=True;"))
+            {
+                baglanti.Open();
+
+                // KITAPID sütunu için bir değer sağlamaya gerek yok, çünkü auto-increment (IDENTITY) olabilir
+                string sorgu_kaydet = "INSERT INTO TBL_KITAPLAR (KITAPAD, KONUSU, YAZARI, SAYFASI, YAYINEVI) VALUES (@KITAPAD, @KONUSU, @YAZARI, @SAYFASI, @YAYINEVI)";
+
+                using (var komut = new SqlCommand(sorgu_kaydet, baglanti))
+                {
+                    komut.Parameters.AddWithValue("@KITAPAD", KitapAd.Text);
+                    komut.Parameters.AddWithValue("@KONUSU", Konusu.Text);
+                    komut.Parameters.AddWithValue("@YAZARI", Yazarı.Text);
+                    komut.Parameters.AddWithValue("@SAYFASI", Sayfa.Text);
+                    komut.Parameters.AddWithValue("@YAYINEVI", Yayınevi.Text);
+
+                    komut.ExecuteNonQuery();
+                }
+
+                baglanti.Close();
+
+                // UI'ı güncelle
+                guncelle();
+
+                // Başarı mesajı göster
+                MessageBox.Show("Kitap başarıyla kaydedildi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
+
 
         private void gridControl1_Click(object sender, EventArgs e)
         {
@@ -74,22 +90,52 @@ namespace Gemlik_Kitabevim
         private void BtnGüncelle_Click(object sender, EventArgs e)
         {
             baglanti.Open();
-            string sorgu_guncelle = "update TBL_KITAPLAR set KITAPAD = '" + KitapAdG.Text + "', KONUSU = '" + KonusuG.Text + "', YAZARI = '"+YazarıG.Text+"', SAYFASI = '"+SayfaG.Text +"', YAYINEVI = '"+YayıneviG.Text +"' where ID = '" + IDG.Text + "'";
+            string sorgu_guncelle = "update TBL_KITAPLAR set KITAPAD = '" + KitapAdG.Text + "', KONUSU = '" + KonusuG.Text + "', YAZARI = '"+YazarıG.Text+"', SAYFASI = '"+SayfaG.Text +"', YAYINEVI = '"+YayıneviG.Text +"' where KITAPID = '" + IDG.Text + "'";
             SqlCommand komut = new SqlCommand(sorgu_guncelle, baglanti);
             komut.ExecuteNonQuery();
             baglanti.Close();
             guncelle();
+
+            MessageBox.Show("Kitap başarıyla güncellendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
 
         private void BtnSil_Click(object sender, EventArgs e)
         {
-            baglanti.Open();
-            string sorgu_sil = "delete from TBL_KITAPLAR where ID = '" + IDS.Text + "'";
-            SqlCommand komut = new SqlCommand(sorgu_sil, baglanti);
-            komut.ExecuteNonQuery();
-            baglanti.Close();
-            guncelle();
+            string kitapID = IDS.Text;
+
+            // Veritabanı bağlantısını oluşturun ve açın
+            using (var baglanti = new SqlConnection("Data Source=Melik-Laptop;Initial Catalog=DboGemlikKitabevim;Integrated Security=True;"))
+            {
+                baglanti.Open();
+
+                // Önce, referanslı kayıtları silin
+                string deleteKayitlarQuery = "DELETE FROM TBL_KAYITLAR WHERE KITAPID = @KITAPID";
+                using (var deleteKayitlarKomut = new SqlCommand(deleteKayitlarQuery, baglanti))
+                {
+                    deleteKayitlarKomut.Parameters.AddWithValue("@KITAPID", kitapID);
+                    deleteKayitlarKomut.ExecuteNonQuery();
+                }
+
+                // Sonra, kitabı silin
+                string deleteKitapQuery = "DELETE FROM TBL_KITAPLAR WHERE KITAPID = @KITAPID";
+                using (var deleteKitapKomut = new SqlCommand(deleteKitapQuery, baglanti))
+                {
+                    deleteKitapKomut.Parameters.AddWithValue("@KITAPID", kitapID);
+                    deleteKitapKomut.ExecuteNonQuery();
+                }
+
+                // Bağlantıyı kapatın
+                baglanti.Close();
+
+                // Veriyi güncelleyin (örneğin, grid kontrolünü yenileyin)
+                guncelle();
+
+                // Başarı mesajı gösterin
+                MessageBox.Show("Kitap başarıyla silindi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
+
 
         private void groupControl2_Paint(object sender, PaintEventArgs e)
         {
